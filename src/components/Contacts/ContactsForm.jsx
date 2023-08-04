@@ -1,14 +1,15 @@
 import React from 'react';
 import { Formik, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
+// import { addContact } from 'redux/contactsSlice';
+import { addContact } from 'redux/operations';
 import { getContacts } from '../../redux/selectors';
 import { FormBox } from './ContactsForm.styled';
 
-const initialValues = {
-  name: '',
-  number: '',
-};
+// const initialValues = {
+//   name: '',
+//   number: '',
+// };
 
 export const ContactsForm = () => {
   const contacts = useSelector(getContacts);
@@ -33,7 +34,7 @@ export const ContactsForm = () => {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik onSubmit={onSubmit}>
       <FormBox>
         <label>
           Name
@@ -60,3 +61,7 @@ export const ContactsForm = () => {
     </Formik>
   );
 };
+
+
+// initialValues = { initialValues };
+
