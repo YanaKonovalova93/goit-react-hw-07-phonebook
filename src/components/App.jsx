@@ -2,8 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from 'redux/operations';
 import { getError, getIsLoading } from 'redux/selectors';
-
-// import { useSelector } from 'react-redux';
 import { getContacts } from '../redux/selectors';
 import { ContactsList } from './Contacts/ContactsList';
 import { ContactsForm } from './Contacts/ContactsForm';
@@ -15,9 +13,9 @@ export const App = () => {
   const error = useSelector(getError);
   const contacts = useSelector(getContacts);
 
-   useEffect(() => {
-     dispatch(fetchContacts());
-   }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <>
@@ -33,16 +31,6 @@ export const App = () => {
       ) : (
         <div>You don't have saved contacts...</div>
       )}
-
     </>
   );
 };
-
-
-
-  /* <h1>Phonebook</h1>
-      <ContactsForm />
-      <h2>Contacts</h2>
-      <Filter />
-      {isLoading && !error && <b>Request in progress...</b>}
-      <ContactsList /> */

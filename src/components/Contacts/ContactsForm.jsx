@@ -1,15 +1,14 @@
 import React from 'react';
 import { Formik, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-// import { addContact } from 'redux/contactsSlice';
 import { addContact } from 'redux/operations';
-import { getContacts } from '../../redux/selectors';
+import { getContacts } from 'redux/selectors';
 import { FormBox } from './ContactsForm.styled';
 
-// const initialValues = {
-//   name: '',
-//   number: '',
-// };
+const initialValues = {
+  name: '',
+  phone: '',
+};
 
 export const ContactsForm = () => {
   const contacts = useSelector(getContacts);
@@ -21,7 +20,7 @@ export const ContactsForm = () => {
     resetForm();
   };
 
-  const handleSubmit = ({ name, number }) => {
+  const handleSubmit = ({ name, phone }) => {
     const isInContacts = contacts.some(contact => {
       return contact.name.toLowerCase() === name.toLowerCase();
     });
@@ -30,11 +29,12 @@ export const ContactsForm = () => {
       alert(`${name} is already in contacts.`);
       return;
     }
-    dispatch(addContact(name, number));
+    const newContact = { name, phone };
+    dispatch(addContact(newContact));
   };
 
   return (
-    <Formik onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} onSubmit={onSubmit}>
       <FormBox>
         <label>
           Name
@@ -50,7 +50,7 @@ export const ContactsForm = () => {
           Number
           <Field
             type="tel"
-            name="number"
+            name="phone"
             pattern="^(\+?[0-9.\(\)\-\s]*)$"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
@@ -61,7 +61,3 @@ export const ContactsForm = () => {
     </Formik>
   );
 };
-
-
-// initialValues = { initialValues };
-
